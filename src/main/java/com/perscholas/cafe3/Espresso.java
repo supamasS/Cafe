@@ -1,8 +1,6 @@
 package com.perscholas.cafe3;
 
-import java.util.Scanner;
-
-public class Espresso extends Product {
+public class Espresso extends Product implements Cloneable {
     private boolean extraShot;
     private boolean macchiato;
 
@@ -51,19 +49,19 @@ public class Espresso extends Product {
     }
 
     @Override
-    public void addOptions(Scanner scanner) {
-        System.out.print("Would you like extra shot? (Y/N) : ");
-        String wantExtraShot = scanner.next();
-        extraShot = (wantExtraShot.equals("Y") || wantExtraShot.equals("y")) ? true : false;
-
-        System.out.print("Would you like macchiato? (Y/N) : ");
-        String wantMacchiato = scanner.next();
-        macchiato = (wantMacchiato.equals("Y") || wantMacchiato.equals("y")) ? true : false;
+    public void addOptions() {
+        extraShot = CafeApp.getUserOption("extra shot");
+        macchiato = CafeApp.getUserOption("macchiato");
     }
 
     @Override
     public void printOptions() {
-        System.out.printf("Extra Shot: %s Macchiato: %s ",
-                (extraShot ? "Y" : "N"), (macchiato ? "Y" : "N"));
+        System.out.printf("\t\tExtra Shot: %s\tMacchiato: %s \n",
+                            (extraShot ? "Yes (Add $2)" : "No"), (macchiato ? "Y (Add $1)" : "No"));
+    }
+
+    @Override
+    public Object clone() {
+        return new Espresso(this.getName(), this.getPrice(), this.getDescription());
     }
 }

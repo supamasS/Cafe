@@ -1,8 +1,6 @@
 package com.perscholas.cafe3;
 
-import java.util.Scanner;
-
-public class Cappuccino extends Product {
+public class Cappuccino extends Product implements Cloneable {
     private boolean peppermint;
     private boolean whippedCream;
 
@@ -51,19 +49,19 @@ public class Cappuccino extends Product {
     }
 
     @Override
-    public void addOptions(Scanner scanner) {
-        System.out.print("Would you like peppermint? (Y/N) : ");
-        String wantPeppermint = scanner.next();
-        peppermint = (wantPeppermint.equals("Y") || wantPeppermint.equals("y")) ? true : false;
-
-        System.out.print("Would you like whipped cream? (Y/N) : ");
-        String wantWhippedCream = scanner.next();
-        whippedCream = (wantWhippedCream.equals("Y") || wantWhippedCream.equals("y")) ? true : false;
+    public void addOptions() {
+        peppermint = CafeApp.getUserOption("peppermint");
+        whippedCream = CafeApp.getUserOption("whipped cream");
     }
 
     @Override
     public void printOptions() {
-        System.out.printf("Peppermint: %s Whipped Cream: %s ",
-                (peppermint ? "Y" : "N"), (whippedCream ? "Y" : "N"));
+        System.out.printf("\t\tPeppermint: %s\tWhipped Cream: %s \n",
+                            (peppermint ? "Yes (Add $2)" : "No"), (whippedCream ? "Yes (Add $1)" : "No"));
+    }
+
+    @Override
+    public Object clone() {
+        return new Cappuccino(this.getName(), this.getPrice(), this.getDescription());
     }
 }

@@ -1,47 +1,66 @@
 package com.perscholas.cafe3;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CafeApp {
+    protected static final double SALES_TAX = 7.5;
+    protected static final String LINE = "-------------------------------------------------------------------------\n";
+    protected static Scanner scanner;
+
     public static void main(String[] args) {
-        Store store = createStore();
-        ShoppingCart shoppingCart = new ShoppingCart();
+        Store store = new Store(
+                new Coffee("Coffee", 3.95, "Plain coffee"),
+                new Espresso("Espresso", 4.95, "Strong black coffee"),
+                new Cappuccino("Cappuccino", 5.95, "Coffee with frothed milk"));
 
-        store.showMainMenu();
-        getOrder(store, shoppingCart);
+        scanner = new Scanner(System.in);
 
-        shoppingCart.checkout();
-    }
-
-    private static void getOrder(Store store, ShoppingCart shoppingCart) {
-        Scanner scanner = new Scanner(System.in);
-        int menuChoice = scanner.nextInt();
-
-        while(menuChoice-1 != store.getItemList().size()) {
-            Product product = store.getItemList().get(menuChoice-1);
-
-            // NEED to create a new object of the same type of the product from the store,
-            // NOT using that object, otherwise, we can't order 2 different kind of espresso.
-
-            product.getUserInput(scanner);
-            shoppingCart.addItem(product);
-
-            store.showMainMenu();
-            menuChoice = scanner.nextInt();
-        }
+        store.getOrder();
 
         scanner.close();
     }
 
-    public static Store createStore() {
-        Store store = new Store();
+    public static int getIntInput(String message) {
+        boolean inputOK = false;
+        int inputNum = 0;
 
-        store.addItem(new Coffee("Coffee", 3.95, "Plain coffee"));
-        store.addItem(new Espresso("Espresso", 4.95, "Strong black coffee"));
-        store.addItem(new Cappuccino("Cappuccino", 5.95, "Coffee with frothed milk"));
+        while(!inputOK) {
 
-        return store;
+            System.out.print(message);
+
+            try {
+                inputNum = scanner.nextInt();
+                inputOK = true;
+            } catch(InputMismatchException e) {
+                System.out.println("ERROR: Incorrect input format, please enter a number!");
+            } finally {
+                // need to clear buffer otherwise it will be infinite loop!
+                scanner.nextLine();
+            }
+        }
+
+        return inputNum;
     }
 
+    public static boolean getUserOption(String optionName) {
+        boolean inputOK = false;
+        String response = "N";
 
+        while(!inputOK) {
+            System.out.print("Would you like " + optionName + "? (y/n) : ");
+            response = scanner.next().toUpperCase();
+
+            if(response.equals("Y") || response.equals("YES") || response.equals("N") || response.equals("NO")) {
+                inputOK = true;
+            } else {
+                System.out.println("ERROR: Incorrect input format, please enter y, yes, n, or no !");
+            }
+
+            // need to clear buffer otherwise it will be infinite loop!
+            scanner.nextLine();
+        }
+
+        return (response.charAt(0) == 'Y');
+    }
 }

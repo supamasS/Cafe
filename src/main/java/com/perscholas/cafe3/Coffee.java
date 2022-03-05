@@ -1,8 +1,6 @@
 package com.perscholas.cafe3;
 
-import java.util.Scanner;
-
-public class Coffee extends Product {
+public class Coffee extends Product implements Cloneable {
     private boolean sugar;
     private boolean milk;
 
@@ -43,19 +41,18 @@ public class Coffee extends Product {
     }
 
     @Override
-    public void addOptions(Scanner scanner) {
-        System.out.print("Would you like sugar with the coffee? (Y/N) : ");
-        String wantSugar = scanner.next();
-        sugar = (wantSugar.equals("Y") || wantSugar.equals("y")) ? true : false;
-
-        System.out.print("Would you like milk with the coffee? (Y/N) : ");
-        String wantMilk = scanner.next();
-        milk = (wantMilk.equals("Y") || wantMilk.equals("y")) ? true : false;
+    public void addOptions() {
+        sugar = CafeApp.getUserOption("sugar");
+        milk = CafeApp.getUserOption("milk");
     }
 
     @Override
     public void printOptions() {
-        System.out.printf("Sugar: %s Milk: %s ",
-                (sugar ? "Y" : "N"), (milk ? "Y" : "N"));
+        System.out.printf("\t\tSugar: %s\tMilk: %s \n", (sugar ? "Yes" : "No"), (milk ? "Yes" : "No"));
+    }
+
+    @Override
+    public Object clone() {
+        return new Coffee(this.getName(), this.getPrice(), this.getDescription());
     }
 }

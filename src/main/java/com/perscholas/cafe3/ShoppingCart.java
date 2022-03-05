@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCart {
-    static final double SALES_TAX = 7.5;
 
     List<Product> cartList;
     double subtotal;
@@ -23,26 +22,32 @@ public class ShoppingCart {
     }
 
     public void addItem(Product product) {
-        cartList.add(product);
-
         product.calculateProductTotal();
         product.printSubtotal();
+        cartList.add(product);
         subtotal += product.getSubtotal();
     }
 
     public void checkout() {
         System.out.println("\nProceed to checkout...\n");
+        System.out.print(CafeApp.LINE);
         System.out.println("Order Summary:");
 
-        cartList.forEach(p -> p.printSubtotal());
+        cartList.forEach(Product::printSubtotal);
+        // cartList.forEach(p -> p.printSubtotal());   // same as above
 
-        System.out.println("-----------------------------");
-        System.out.printf("\nPurchase Subtotal: $%.2f\n", subtotal);
+        printTotal();
+    }
 
-        double addedSalesTax = SALES_TAX/100.0 * subtotal;
-        System.out.printf("Sales Tax: $%.2f\n", addedSalesTax);
+    private void printTotal() {
+        System.out.print(CafeApp.LINE);
+        System.out.printf("Purchase Subtotal: $%.2f\n", subtotal);
 
-        double total = subtotal + addedSalesTax;
+        double salesTax = CafeApp.SALES_TAX/100.0 * subtotal;
+        System.out.printf("Sales Tax: $%.2f\n", salesTax);
+
+        double total = subtotal + salesTax;
         System.out.printf("Purchase Total: $%.2f\n", total);
+        System.out.print(CafeApp.LINE);
     }
 }

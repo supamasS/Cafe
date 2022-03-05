@@ -1,8 +1,6 @@
 package com.perscholas.cafe3;
 
-import java.util.Scanner;
-
-public abstract class Product {
+public abstract class Product implements Cloneable {
     private String name = "product";
     private double price;
     private String description;
@@ -61,19 +59,21 @@ public abstract class Product {
 
     public abstract void calculateProductTotal();
 
-    public abstract void addOptions(Scanner scanner);
+    public abstract void addOptions();
 
     public abstract void printOptions();
 
-    public void getUserInput(Scanner scanner) {
-        System.out.print("Please enter the number of " + getName() + " : ");
-        quantity = scanner.nextInt();
-        addOptions(scanner);
+    public void getUserInputQuantity() {
+        quantity = CafeApp.getIntInput("Please enter the number of " + getName() + " : ");
     }
 
     public void printSubtotal() {
-        System.out.printf("Item:\t%s\tPrice: $%.2f\tQty: %d\tSubtotal: $%.2f",
-                name, price, quantity, subtotal);
+        System.out.print(CafeApp.LINE);
+        System.out.printf("Item:\t%-20s\tPrice: $%.2f\tQty: %d\tSubtotal: $%.2f\n",
+                            name, price, quantity, subtotal);
         printOptions();
     }
+
+    @Override
+    public abstract Object clone();
 }
