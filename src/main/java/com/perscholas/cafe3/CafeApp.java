@@ -43,24 +43,4 @@ public class CafeApp {
         return inputNum;
     }
 
-    public static boolean getUserOption(String optionName) {
-        boolean inputOK = false;
-        String response = "N";
-
-        while(!inputOK) {
-            System.out.print("Would you like " + optionName + "? (y/n) : ");
-            response = scanner.next().toUpperCase();
-
-            if(response.equals("Y") || response.equals("YES") || response.equals("N") || response.equals("NO")) {
-                inputOK = true;
-            } else {
-                System.out.println("ERROR: Incorrect input format, please enter y, yes, n, or no !");
-            }
-
-            // need to clear buffer otherwise it will be infinite loop!
-            scanner.nextLine();
-        }
-
-        return (response.charAt(0) == 'Y');
-    }
 }

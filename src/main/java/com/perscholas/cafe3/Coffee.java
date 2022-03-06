@@ -38,8 +38,8 @@ public class Coffee extends Product implements Cloneable {
 
     @Override
     public void addOptions() {
-        sugar = CafeApp.getUserOption("sugar");
-        milk = CafeApp.getUserOption("milk");
+        sugar = getUserOption("sugar");
+        milk = getUserOption("milk");
     }
 
     @Override

@@ -46,8 +46,8 @@ public class Cappuccino extends Product implements Cloneable {
 
     @Override
     public void addOptions() {
-        peppermint = CafeApp.getUserOption("peppermint");
-        whippedCream = CafeApp.getUserOption("whipped cream");
+        peppermint = getUserOption("peppermint");
+        whippedCream = getUserOption("whipped cream");
     }
 
     @Override

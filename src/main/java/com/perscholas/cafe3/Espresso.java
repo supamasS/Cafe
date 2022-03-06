@@ -46,14 +46,14 @@ public class Espresso extends Product implements Cloneable {
 
     @Override
     public void addOptions() {
-        extraShot = CafeApp.getUserOption("extra shot");
-        macchiato = CafeApp.getUserOption("macchiato");
+        extraShot = getUserOption("extra shot");
+        macchiato = getUserOption("macchiato");
     }
 
     @Override
     public void printOptions() {
         System.out.printf("\t\tExtra Shot: %s\tMacchiato: %s \n",
-                            (extraShot ? "Yes (Add $2)" : "No"), (macchiato ? "Y (Add $1)" : "No"));
+                            (extraShot ? "Yes (Add $2)" : "No"), (macchiato ? "Yes (Add $1)" : "No"));
     }
 
     @Override
