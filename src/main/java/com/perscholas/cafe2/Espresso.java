@@ -11,14 +11,10 @@ public class Espresso extends Product {
         this.macchiato = false;
     }
 
-    public Espresso(String name, double price, String description) {
+    public Espresso(String name, double price, String description, boolean extraShot, boolean macchiato) {
         super(name, price, description);
-    }
-
-    public Espresso(String name, double price, String description, boolean sugar, boolean milk) {
-        super(name, price, description);
-        this.extraShot = sugar;
-        this.macchiato = milk;
+        this.extraShot = extraShot;
+        this.macchiato = macchiato;
     }
 
     public boolean isExtraShot() {
@@ -56,12 +52,12 @@ public class Espresso extends Product {
         setQuantity(scanner.nextInt());
 
         System.out.print("Would you like extra shot? (Y/N) : ");
-        String wantExtraShot = scanner.next();
-        extraShot = (wantExtraShot.equals("Y") || wantExtraShot.equals("y")) ? true : false;
+        String wantExtraShot = scanner.next().toUpperCase();
+        extraShot = wantExtraShot.equals("Y");
 
         System.out.print("Would you like macchiato? (Y/N) : ");
-        String wantMacchiato = scanner.next();
-        macchiato = (wantMacchiato.equals("Y") || wantMacchiato.equals("y")) ? true : false;
+        String wantMacchiato = scanner.next().toUpperCase();
+        macchiato = wantMacchiato.equals("Y");
     }
 
     @Override

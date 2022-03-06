@@ -11,10 +11,6 @@ public class Cappuccino extends Product {
         this.whippedCream = false;
     }
 
-    public Cappuccino(String name, double price, String description) {
-        super(name, price, description);
-    }
-
     public Cappuccino(String name, double price, String description, boolean peppermint, boolean whippedCream) {
         super(name, price, description);
         this.peppermint = peppermint;
@@ -56,12 +52,12 @@ public class Cappuccino extends Product {
         setQuantity(scanner.nextInt());
 
         System.out.print("Would you like peppermint? (Y/N) : ");
-        String wantPeppermint = scanner.next();
-        peppermint = (wantPeppermint.equals("Y") || wantPeppermint.equals("y")) ? true : false;
+        String wantPeppermint = scanner.next().toUpperCase();
+        peppermint = wantPeppermint.equals("Y");
 
         System.out.print("Would you like whipped cream? (Y/N) : ");
-        String wantWhippedCream = scanner.next();
-        whippedCream = (wantWhippedCream.equals("Y") || wantWhippedCream.equals("y")) ? true : false;
+        String wantWhippedCream = scanner.next().toUpperCase();
+        whippedCream = wantWhippedCream.equals("Y");
     }
 
     @Override

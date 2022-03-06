@@ -9,10 +9,6 @@ public class Cappuccino extends Product implements Cloneable {
         this.whippedCream = false;
     }
 
-    public Cappuccino(String name, double price, String description) {
-        super(name, price, description);
-    }
-
     public Cappuccino(String name, double price, String description, boolean peppermint, boolean whippedCream) {
         super(name, price, description);
         this.peppermint = peppermint;
@@ -62,6 +58,6 @@ public class Cappuccino extends Product implements Cloneable {
 
     @Override
     public Object clone() {
-        return new Cappuccino(this.getName(), this.getPrice(), this.getDescription());
+        return new Cappuccino(this.getName(), this.getPrice(), this.getDescription(), this.peppermint, this.whippedCream);
     }
 }

@@ -10,9 +10,9 @@ public class CafeApp {
 
     public static void main(String[] args) {
         Store store = new Store(
-                new Coffee("Coffee", 3.95, "Plain coffee"),
-                new Espresso("Espresso", 4.95, "Strong black coffee"),
-                new Cappuccino("Cappuccino", 5.95, "Coffee with frothed milk"));
+                new Coffee("Coffee", 3.95, "Plain coffee", false, false),
+                new Espresso("Espresso", 4.95, "Strong black coffee", false, false),
+                new Cappuccino("Cappuccino", 5.95, "Coffee with frothed milk", false, false));
 
         scanner = new Scanner(System.in);
 

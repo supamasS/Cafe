@@ -9,14 +9,10 @@ public class Espresso extends Product implements Cloneable {
         this.macchiato = false;
     }
 
-    public Espresso(String name, double price, String description) {
+    public Espresso(String name, double price, String description, boolean extraShot, boolean macchiato) {
         super(name, price, description);
-    }
-
-    public Espresso(String name, double price, String description, boolean sugar, boolean milk) {
-        super(name, price, description);
-        this.extraShot = sugar;
-        this.macchiato = milk;
+        this.extraShot = extraShot;
+        this.macchiato = macchiato;
     }
 
     public boolean isExtraShot() {
@@ -62,6 +58,6 @@ public class Espresso extends Product implements Cloneable {
 
     @Override
     public Object clone() {
-        return new Espresso(this.getName(), this.getPrice(), this.getDescription());
+        return new Espresso(this.getName(), this.getPrice(), this.getDescription(), this.extraShot, this.macchiato);
     }
 }

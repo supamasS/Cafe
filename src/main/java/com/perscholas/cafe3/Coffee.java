@@ -9,10 +9,6 @@ public class Coffee extends Product implements Cloneable {
         this.milk = false;
     }
 
-    public Coffee(String name, double price, String description) {
-        super(name, price, description);
-    }
-
     public Coffee(String name, double price, String description, boolean sugar, boolean milk) {
         super(name, price, description);
         this.sugar = sugar;
@@ -53,6 +49,6 @@ public class Coffee extends Product implements Cloneable {
 
     @Override
     public Object clone() {
-        return new Coffee(this.getName(), this.getPrice(), this.getDescription());
+        return new Coffee(this.getName(), this.getPrice(), this.getDescription(), this.sugar, this.milk);
     }
 }

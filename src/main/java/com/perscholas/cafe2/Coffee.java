@@ -1,5 +1,6 @@
 package com.perscholas.cafe2;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Coffee extends Product {
@@ -9,10 +10,6 @@ public class Coffee extends Product {
     public Coffee() {
         this.sugar = false;
         this.milk = false;
-    }
-
-    public Coffee(String name, double price, String description) {
-        super(name, price, description);
     }
 
     public Coffee(String name, double price, String description, boolean sugar, boolean milk) {
@@ -48,12 +45,12 @@ public class Coffee extends Product {
         setQuantity(scanner.nextInt());
 
         System.out.print("Would you like sugar? (Y/N) : ");
-        String wantSugar = scanner.next();
-        sugar = (wantSugar.equals("Y") || wantSugar.equals("y")) ? true : false;
+        String wantSugar = scanner.next().toUpperCase();
+        sugar = wantSugar.equals("Y");
 
         System.out.print("Would you like milk? (Y/N) : ");
-        String wantMilk = scanner.next();
-        milk = (wantMilk.equals("Y") || wantMilk.equals("y")) ? true : false;
+        String wantMilk = scanner.next().toUpperCase();
+        milk = wantMilk.equals("Y");
     }
 
     @Override
